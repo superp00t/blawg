@@ -1,0 +1,8 @@
+<h1>{{.BlogTitle}}</h1>
+{{range $bl := .PostList}}
+<div class="listing">
+  <a href="{{$bl.Link}}"><h1>{{$bl.Header}}</h1></a>
+  <p class="timestamp" data-timestamp={{$bl.CreatedStamp}}>Created at {{$bl.Created}}</p>
+  <p class="timestamp" data-timestamp={{$bl.LastUpdatedStamp}}>Last modified at {{$bl.LastUpdated}}</p>
+</div>
+{{end}}

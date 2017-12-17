@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<head>
+<meta charset="utf-8">
+<title>{{.Title}}</title>
+<style>
+@font-face {
+    font-family: "TI Actu Beta Heavy";
+    src: url("https://img.ikrypto.club/font/TIActuBeta-Heavy.woff");
+}
+@font-face {
+    font-family: "TI Actu Beta Mono";
+    src: url("https://img.ikrypto.club/font/TIActuBeta-Mono.woff");
+}
+@font-face {
+    font-family: "Swift Neue";
+    src: url("https://img.ikrypto.club/font/SwiftNeueLTW01.woff");
+}
+.mdiv h1, h2, h3, h4 {
+    font-family: "TI Actu Beta Heavy";
+    border-bottom: 1px solid #000;
+}
+.mdiv p {
+    font-family: "Swift Neue";
+    font-size: 12px;
+}
+.mdiv {
+    display: block;
+    margin: auto;
+    width: 80%;
+    margin-bottom: 40px;
+}
+.mdiv img {
+    padding: 20px;
+}
+.listing {
+    margin-top: 20px;
+    border-left: 2 #333  solid;
+    border-bottom: 2 #999 solid;
+}
+.landing {
+    margin-left: 10%;
+    font-family: "TI Actu Beta Mono";
+    font-size: 14px;
+    color: #33F;
+}
+.timestamp {
+    margin-left: 5px;
+    color: #000;
+    font-family: "TI Actu Beta Mono" !important;
+    font-size: 8.5px !important;
+}
+.author {
+    margin-left: 5px;
+
+}
+.texcode {
+    padding: 20px;
+}
+</style>
+<script src="https://img.ikrypto.club/katex/contrib/auto-render.min.js"></script>
+<script src="https://img.ikrypto.club/katex/katex.min.js"></script>
+<script>
+window.addEventListener("load", function() {
+    try {
+        renderMathInElement(document.querySelector(".mdiv"), {delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "$", right: "$", display: false},
+        ]})
+    }
+    catch (e) {
+        console.warn(e)
+    }
+
+    function getTime(ts) {
+        var milli = 1;
+        var second = 1000 * milli;
+        var minute = 60 * second;
+        var hour = 60 * minute;
+
+        var since = new Date().getTime() - ts;
+
+        if(since > (24 * hour)) {
+            return false;
+        }
+
+        if(since < hour) {
+            if(since < minute) {
+                return Math.floor(since / second) + " seconds ago";
+            }
+
+            return Math.floor(since / minute) + " minutes ago";
+        }
+
+        return Math.floor(since / hour) + " hours ago";
+    }
+
+    document.querySelectorAll(".timestamp").forEach(function(e) {
+        var time = e.getAttribute("data-timestamp");
+        var y = getTime(parseInt(time));
+        if(y) {
+            e.innerHTML += " (" + y + ")";
+        }
+    });
+});
+</script>
+<link rel="stylesheet" href="https://img.ikrypto.club/katex/katex.min.css"></link>
+</head>
+<body>
+<div class="landing">
+    <a href="{{.BaseURL}}/">Home</a>
+</div>
+<div class="mdiv">
